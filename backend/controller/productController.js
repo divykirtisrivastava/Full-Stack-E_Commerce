@@ -34,3 +34,15 @@ exports.deleteProduct = (req, res)=>{
     }
   })
 }
+
+exports.updateProduct = (req, res)=>{
+  let id  = req.params.id
+  let newData = req.body
+  let sql = 'update product set ? where id = ?'
+  db.query(sql, [newData, id], (err, result)=>{
+    if(err) throw err
+    else{
+      res.send('data updated')
+    }
+  })
+}
