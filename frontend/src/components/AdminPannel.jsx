@@ -7,16 +7,16 @@ export default function AdminPannel() {
 
   let [data, setData] = useState([])
 
-  useEffect(()=>{
+  useEffect(() => {
     fetchProductData()
   }, [])
 
-  async function fetchProductData(){
+  async function fetchProductData() {
     let result = await axios.get('http://localhost:3000/api/getProduct')
     console.log(result.data)
     setData(result.data)
   }
-  
+
 
 
   return (
@@ -60,9 +60,9 @@ export default function AdminPannel() {
                         scope="col"
                         className="px-4 py-3.5 text-left text-sm font-normal text-gray-700"
                       >
-                      Edit
+                        Edit
                       </th>
-                     
+
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200 bg-white">
@@ -79,13 +79,13 @@ export default function AdminPannel() {
                             </div> */}
                             <div className="ml-4">
                               <div className="text-sm font-medium text-gray-900">{product.productBrand}</div>
-                             
+
                             </div>
                           </div>
                         </td>
                         <td className="whitespace-nowrap px-12 py-4">
                           <div className="text-sm text-gray-900 ">{product.productType}</div>
-                        
+
                         </td>
                         <td className="whitespace-nowrap px-4 py-4">
                           <span className="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800">
@@ -95,11 +95,12 @@ export default function AdminPannel() {
                         <td className="whitespace-nowrap px-4 py-4 text-sm text-gray-700">
                           {product.productRating}
                         </td>
-                        <td className="whitespace-nowrap px-4 py-4 text-right text-sm font-medium">
-                          <a href="#" className="text-gray-700">
-                            Edit
-                          </a>
+                        <td className="whitespace-nowrap px-4 py-4 text-sm text-gray-700">
+                          <button type="button" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">View</button>
+                          <button type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Delete</button>
+                          <button type="button" class="focus:outline-none text-black bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900">Update</button>
                         </td>
+
                       </tr>
                     ))}
                   </tbody>
