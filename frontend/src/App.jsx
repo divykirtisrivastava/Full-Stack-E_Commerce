@@ -1,12 +1,12 @@
 import React from 'react'
 import Navbar from './components/Navbar'
-import AdminPannel from './components/AdminPannel'
+import {Outlet} from 'react-router-dom'
 
 export default function App() {
   return (
     <div>
       <Navbar/>
-      <AdminPannel/>
+      <Outlet/>
     </div>
   )
 }

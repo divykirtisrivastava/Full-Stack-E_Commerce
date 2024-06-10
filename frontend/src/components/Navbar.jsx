@@ -2,19 +2,20 @@
 
 import React from 'react'
 import { Menu, X } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 const menuItems = [
   {
     name: 'Home',
-    href: '#',
+    to: '',
   },
   {
     name: 'About',
-    href: '#',
+    to: '#',
   },
   {
     name: 'Contact',
-    href: '#',
+    to: '#',
   },
 ]
 
@@ -49,23 +50,24 @@ export default function Navbar() {
           <ul className="inline-flex space-x-8">
             {menuItems.map((item) => (
               <li key={item.name}>
-                <a
-                  href={item.href}
+                <Link
+                  to={item.to}
                   className="text-sm font-semibold text-gray-800 hover:text-gray-900"
                 >
                   {item.name}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
         </div>
         <div className="hidden lg:block">
-          <button
+          <Link
             type="button"
+            to='/addProduct'
             className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
           >
            Add Product
-          </button>
+          </Link>
         </div>
         <div className="lg:hidden">
           <Menu onClick={toggleMenu} className="h-6 w-6 cursor-pointer" />
