@@ -6,6 +6,7 @@ export default function ViewData() {
     let [data, setData] = useState([])
     let {id} = useParams()
     console.log(id)
+    
 
     async function getDataBYId(){
         let result  = await axios.get(`http://localhost:3000/api/getProductById/${id}`)
