@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 
 
@@ -13,12 +14,10 @@ export default function AdminPannel() {
 
   async function fetchProductData() {
     let result = await axios.get('http://localhost:3000/api/getProduct')
-    console.log(result.data)
     setData(result.data)
   }
 
 async function deleteProduct(id){
-  console.log(id)
   await axios.delete(`http://localhost:3000/api/deleteProduct/${id}`)
   fetchProductData()
 }
@@ -55,12 +54,7 @@ async function deleteProduct(id){
                         Product Price
                       </th>
 
-                      <th
-                        scope="col"
-                        className="px-4 py-3.5 text-left text-sm font-normal text-gray-700"
-                      >
-                        Product Rating
-                      </th>
+                     
                       <th
                         scope="col"
                         className="px-4 py-3.5 text-left text-sm font-normal text-gray-700"
@@ -97,11 +91,11 @@ async function deleteProduct(id){
                             {product.productPrice}
                           </span>
                         </td>
+                      
                         <td className="whitespace-nowrap px-4 py-4 text-sm text-gray-700">
-                          {product.productRating}
-                        </td>
-                        <td className="whitespace-nowrap px-4 py-4 text-sm text-gray-700">
-                          <button type="button" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">View</button>
+                          <Link type="button"
+                          to={`/viewData/${product.id}`}
+                          class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">View</Link>
                           <button type="button" 
                           onClick={()=>deleteProduct(product.id)}
                           class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Delete</button>
