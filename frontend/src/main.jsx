@@ -6,6 +6,7 @@ import { Route, RouterProvider,createBrowserRouter, createRoutesFromElements } f
 import AdminPannel from './components/AdminPannel.jsx'
 import AddProduct from './components/AddProduct.jsx'
 import ViewData from './components/ViewData.jsx'
+import UpdateProduct from './components/UpdateProduct.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -13,6 +14,7 @@ const router = createBrowserRouter(
       <Route path='' element={<AdminPannel/>}/>
     <Route path='/addProduct' element={<AddProduct/>} />
     <Route path='/viewData/:id' element={<ViewData/>} />
+    <Route path='/updateData/:id' element={<UpdateProduct/>} />
     </Route>
   )
 )
