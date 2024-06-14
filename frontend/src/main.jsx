@@ -7,15 +7,24 @@ import AdminPannel from './components/AdminPannel.jsx'
 import AddProduct from './components/AddProduct.jsx'
 import ViewData from './components/ViewData.jsx'
 import UpdateProduct from './components/UpdateProduct.jsx'
+import ClientApp from './ClientApp.jsx'
+import Home from './client/Home.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path='/' element={<App/>}>
-      <Route path='' element={<AdminPannel/>}/>
-    <Route path='/addProduct' element={<AddProduct/>} />
-    <Route path='/viewData/:id' element={<ViewData/>} />
-    <Route path='/updateData/:id' element={<UpdateProduct/>} />
+    <>
+    <Route path='/' element={<ClientApp/>}>
+    <Route path='' element={<Home/>} />
     </Route>
+
+    <Route path='/admin' element={<App/>}>
+    <Route path='' element={<AdminPannel/>}/>
+    <Route path='/admin/addProduct' element={<AddProduct/>} />
+    <Route path='/admin/viewData/:id' element={<ViewData/>} />
+    <Route path='/admin/updateData/:id' element={<UpdateProduct/>} />
+    </Route>
+
+    </>
   )
 )
 

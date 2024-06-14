@@ -23,7 +23,7 @@ export default function AddProduct() {
     async function handleSubmit(e){
         e.preventDefault()
         await axios.post('http://localhost:3000/api/productSave', data)
-        navigation('/')
+        navigation('/admin')
     }
 
   return (
