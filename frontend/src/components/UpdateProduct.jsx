@@ -35,7 +35,7 @@ getDataBYId()
     async function handleSubmit(e){
         e.preventDefault()
         await axios.put(`http://localhost:3000/api/updateProduct/${id}`, data)
-        navigation('/')
+        navigation('/admin')
     }
 
   return (

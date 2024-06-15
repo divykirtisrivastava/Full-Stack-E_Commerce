@@ -14,6 +14,11 @@ export default function Home() {
       let result = await axios.get('http://localhost:3000/api/getProduct')
       setData(result.data)
     }
+   async function puma(){
+    let result = await axios.get('http://localhost:3000/api/getProduct')
+    let final  = result.data.filter((item)=> item.productBrand  == 'Puma')
+    setData(final)
+    }
   return (
    <>
     <aside className="fixed flex h-screen w-64 flex-col overflow-y-auto border-r bg-black px-5 py-8">
@@ -38,28 +43,37 @@ export default function Home() {
             </a>
           </div>
           <div className="space-y-3 ">
-            <label className="px-3 text-xs font-semibold uppercase text-white">content</label>
-            <a
+            <label className="px-3 text-xs font-semibold uppercase text-white">Brand</label>
+            <button
+            onClick={fetchProductData}
+              className="flex transform items-center rounded-lg px-3 py-2 text-gray-200 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
+            
+            >
+             
+              <span className="mx-2 text-sm font-medium">All</span>
+            </button>
+            <button
+            onClick={puma}
+              className="flex transform items-center rounded-lg px-3 py-2 text-gray-200 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
+            
+            >
+             
+              <span className="mx-2 text-sm font-medium">Puma</span>
+            </button>
+            <button
               className="flex transform items-center rounded-lg px-3 py-2 text-gray-200 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
               href="#"
             >
-              <Newspaper className="h-5 w-5" aria-hidden="true" />
-              <span className="mx-2 text-sm font-medium">Blogs</span>
-            </a>
-            <a
+             
+              <span className="mx-2 text-sm font-medium">Adidas</span>
+            </button>
+            <button
               className="flex transform items-center rounded-lg px-3 py-2 text-gray-200 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
               href="#"
             >
-              <BellRing className="h-5 w-5" aria-hidden="true" />
-              <span className="mx-2 text-sm font-medium">Notifications</span>
-            </a>
-            <a
-              className="flex transform items-center rounded-lg px-3 py-2 text-gray-200 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
-              href="#"
-            >
-              <Paperclip className="h-5 w-5" aria-hidden="true" />
-              <span className="mx-2 text-sm font-medium">Checklists</span>
-            </a>
+              
+              <span className="mx-2 text-sm font-medium">Zara</span>
+            </button>
           </div>
 
           <div className="space-y-3 ">

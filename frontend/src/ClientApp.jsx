@@ -5,7 +5,7 @@ import { Outlet } from 'react-router-dom'
 export default function ClientApp() {
   return (
     <div>
-      <ClientNavbar/>
+    <ClientNavbar/>
       <Outlet/>
     </div>
   )
