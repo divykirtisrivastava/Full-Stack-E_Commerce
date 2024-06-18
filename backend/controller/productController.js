@@ -57,3 +57,14 @@ exports.updateProduct = (req, res)=>{
     }
   })
 }
+
+exports.searchProduct = (req, res)=>{
+  let inp = req.params.inp
+  let sql = `select * from product where productType like ?`  
+  db.query(sql, ['%' + inp + '%'], (err, result)=>{
+    if(err) throw err
+    else{
+      res.json(result)
+    }
+  })
+}
