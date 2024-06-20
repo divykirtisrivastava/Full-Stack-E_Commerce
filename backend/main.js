@@ -2,6 +2,7 @@ const express = require('express')
 const cors = require('cors')
 const db  = require('./databaseConfig.js')
 let productRouter = require('./routes/productRoute.js')
+let adminRouter = require('./routes/adminRoute.js')
 let app = express()
 app.use(express.json())
 app.use(cors())
@@ -29,6 +30,9 @@ let productTableQuery  = `CREATE TABLE if not exists product (
     })
   
 app.use('/api', productRouter)
+
+app.use('/api', adminRouter)
+
 
 app.listen(3000, ()=>{
     console.log("server is running at 3000")

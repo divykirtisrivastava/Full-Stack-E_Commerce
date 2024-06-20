@@ -1,7 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { ArrowRight } from 'lucide-react'
+import axios from 'axios'
 
 export default function AdminLogin() {
+  let [data, setData] = useState({
+    email: "",
+    password: ""
+  })
+  let {email, password} = data
+
+  function handleChange(e){
+    setData({...data, [e.target.name]: e.target.value})
+  }
+
+  async function handleLogin(e){
+    e.preventDefault()
+
+    let result  = await axios.post('http://localhost:3000/api/adminLogin', data)
+    console.log(result.data)
+  }
   return (
     <section>
       <div className="flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
@@ -33,7 +50,7 @@ export default function AdminLogin() {
               Create a free account
             </a>
           </p>
-          <form action="#" method="POST" className="mt-8">
+          <form action="#" method="POST" className="mt-8" onSubmit={handleLogin}>
             <div className="space-y-5">
               <div>
                 <label htmlFor="" className="text-base font-medium text-gray-900">
@@ -45,6 +62,9 @@ export default function AdminLogin() {
                     className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                     type="email"
                     placeholder="Email"
+                    name='email'
+                    value={email}
+                    onChange={handleChange}
                   ></input>
                 </div>
               </div>
@@ -64,12 +84,15 @@ export default function AdminLogin() {
                     className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                     type="password"
                     placeholder="Password"
+                    name='password'
+                    value={password}
+                    onChange={handleChange}
                   ></input>
                 </div>
               </div>
               <div>
                 <button
-                  type="button"
+                  type="submit"
                   className="inline-flex w-full items-center justify-center rounded-md bg-black px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-black/80"
                 >
                   Get started <ArrowRight className="ml-2" size={16} />

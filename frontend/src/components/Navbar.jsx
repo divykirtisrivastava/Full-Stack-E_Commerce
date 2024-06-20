@@ -3,6 +3,7 @@
 import React from 'react'
 import { Menu, X } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import '../App.css'
 
 const menuItems = [
   {
@@ -44,7 +45,7 @@ export default function Navbar() {
               />
             </svg>
           </span>
-          <span className="font-bold">DevUI</span>
+          <span className="font-bold" id='title'>DevUI</span>
         </div>
         <div className="hidden lg:block">
           <ul className="inline-flex space-x-8">
