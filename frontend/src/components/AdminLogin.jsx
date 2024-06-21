@@ -1,8 +1,12 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { ArrowRight } from 'lucide-react'
 import axios from 'axios'
+import UserContext from '../context/UserContext'
+import { useNavigate } from 'react-router-dom'
 
 export default function AdminLogin() {
+  let {setPass} = useContext(UserContext)
+  let navigation = useNavigate()
   let [data, setData] = useState({
     email: "",
     password: ""
@@ -17,7 +21,13 @@ export default function AdminLogin() {
     e.preventDefault()
 
     let result  = await axios.post('http://localhost:3000/api/adminLogin', data)
-    console.log(result.data)
+    
+   if(result.data){
+    setPass(result.data)
+    navigation('/admin')
+   }else{
+    alert("U enter the wrong Details")
+   }
   }
   return (
     <section>
