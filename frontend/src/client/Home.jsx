@@ -37,6 +37,21 @@ export default function Home() {
       let result  = await axios.get(`http://localhost:3000/api/searchProduct/${inp}`)
       setData(result.data)
     }
+
+
+    async function saveCart(data){
+   let result =  await axios.post('http://localhost:3000/api/cartSave', {
+        productBrand: data.productBrand,
+        productPrice: data.productPrice,
+        productType:data.productType,
+        productRating:data.productRating
+      })
+
+     if(result.data == true){
+      alert("product saved into cart !")
+     }
+    
+    }
   return (
    <>
     <aside className="fixed flex h-screen w-64 flex-col overflow-y-auto border-r bg-black px-5 py-8">
@@ -133,6 +148,7 @@ onClick={handleSearch}
           
           <button
             type="button"
+            onClick={()=>saveCart(data)}
             className="mt-4 w-full rounded-sm bg-black px-2 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
           >
             Add To Cart
