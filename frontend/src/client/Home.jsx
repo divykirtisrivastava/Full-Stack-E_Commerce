@@ -4,9 +4,10 @@ import '../App.css'
 import axios from 'axios'
 
 export default function Home() {
+  let [inp, setInp] = useState('')
+  console.log(inp)
+
     let [data, setData] = useState([])
-    let [inp, setInp] = useState('')
-    console.log(inp)
 
     useEffect(() => {
       fetchProductData()
@@ -31,14 +32,13 @@ export default function Home() {
         let result = await axios.get('http://localhost:3000/api/getProduct')
         let final  = result.data.filter((item)=> item.productBrand  == 'Zara')
         setData(final)
-        }
+      }
 
     async function handleSearch(){
       let result  = await axios.get(`http://localhost:3000/api/searchProduct/${inp}`)
       setData(result.data)
     }
-
-
+    
     async function saveCart(data){
    let result =  await axios.post('http://localhost:3000/api/cartSave', {
         productBrand: data.productBrand,

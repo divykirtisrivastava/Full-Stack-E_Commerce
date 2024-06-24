@@ -11,12 +11,15 @@ import ClientApp from './ClientApp.jsx'
 import Home from './client/Home.jsx'
 import AdminLogin from './components/AdminLogin.jsx'
 import Protected from './components/Protected.jsx'
+import Cart from './client/Cart.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
     <Route path='/' element={<ClientApp/>}>
     <Route path='' element={<Home/>} />
+    <Route path='/cart' element={<Cart/>} />
+
     </Route>
 
     <Route path='/admin' element={<App/>}>

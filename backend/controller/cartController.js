@@ -13,3 +13,25 @@ exports.cartSave =  (req, res)=>{
         }
     })
 }
+
+
+exports.getCart = (req, res)=>{
+  let sql = "select * from cart"
+  db.query(sql, (err, result)=>{
+    if(err) throw err
+    else{
+      res.json(result)
+    }
+  })
+}
+
+exports.deleteCart = (req, res)=>{
+  let id  = req.params.id
+  let sql  = "delete from cart where id  = ?"
+  db.query(sql, [id], (err, result)=>{
+    if(err) throw err
+    else{
+      res.send('data deleted')
+    }
+  })
+}

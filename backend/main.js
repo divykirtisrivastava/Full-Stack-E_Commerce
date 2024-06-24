@@ -4,6 +4,7 @@ const db  = require('./databaseConfig.js')
 let productRouter = require('./routes/productRoute.js')
 let adminRouter = require('./routes/adminRoute.js')
 let cartRouter = require('./routes/cartRoute.js')
+
 let app = express()
 app.use(express.json())
 app.use(cors())
