@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Trash, Heart } from 'lucide-react'
 import axios from 'axios'
+import UserContext from '../context/UserContext'
 
 
 
 export default function Cart() {
     let [data, setData] = useState([])
+    let {setCount} = useContext(UserContext)
 
     useEffect(() => {
         fetchCartData()
@@ -14,6 +16,7 @@ export default function Cart() {
     async function fetchCartData() {
       let result = await axios.get('http://localhost:3000/api/getCart')
       setData(result.data)
+      setCount(result.data.length)
     }
 
 async function deleteCart(id){
@@ -25,7 +28,7 @@ async function deleteCart(id){
   }
 
   let cost  = data.reduce((acc , curent)=> acc + JSON.parse(curent.productPrice) ,0)
-  
+
   return (
     <div className="mx-auto flex max-w-3xl flex-col space-y-4 p-6 px-2 sm:p-10 sm:px-2">
       <h2 className="text-3xl font-bold">Your cart</h2>

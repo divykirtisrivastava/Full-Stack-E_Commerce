@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { BarChart, Wallet, Newspaper, BellRing, Paperclip, Brush, Wrench } from 'lucide-react'
 import '../App.css'
 import axios from 'axios'
+import UserContext from '../context/UserContext'
 
 export default function Home() {
   let [inp, setInp] = useState('')
@@ -48,9 +49,23 @@ export default function Home() {
       })
 
      if(result.data == true){
+      fetchCartData()
       alert("product saved into cart !")
      }
     
+    }
+
+
+    // cart length
+    let {setCount} = useContext(UserContext)
+
+    useEffect(() => {
+        fetchCartData()
+    }, [])
+  
+    async function fetchCartData() {
+      let result = await axios.get('http://localhost:3000/api/getCart')
+      setCount(result.data.length)
     }
   return (
    <>
