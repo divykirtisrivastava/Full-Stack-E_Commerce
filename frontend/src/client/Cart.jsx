@@ -16,7 +16,6 @@ export default function Cart() {
       setData(result.data)
     }
 
-    
 async function deleteCart(id){
     let flag  = confirm("Are u sure to delete item")
    if(flag){
@@ -24,6 +23,9 @@ async function deleteCart(id){
     fetchCartData()
    }
   }
+
+  let cost  = data.reduce((acc , curent)=> acc + JSON.parse(curent.productPrice) ,0)
+  
   return (
     <div className="mx-auto flex max-w-3xl flex-col space-y-4 p-6 px-2 sm:p-10 sm:px-2">
       <h2 className="text-3xl font-bold">Your cart</h2>
@@ -70,7 +72,7 @@ async function deleteCart(id){
       <div className="space-y-1 text-right">
         <p>
           Total amount:
-          <span className="font-semibold"> ₹48,967</span>
+          <span className="font-semibold">{cost}</span>
         </p>
       </div>
       <div className="flex justify-end space-x-4">
