@@ -1,8 +1,9 @@
 let express = require('express')
 let router = express.Router()
 let productController = require('../controller/productController')
+let uploads  = require('../multerConfig.js')
 
-router.post('/productSave', productController.productSave )
+router.post('/productSave',uploads.single('image'), productController.productSave )
 
 router.get('/getProduct', productController.getProduct)
 

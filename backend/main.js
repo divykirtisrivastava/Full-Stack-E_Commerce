@@ -8,6 +8,7 @@ let cartRouter = require('./routes/cartRoute.js')
 let app = express()
 app.use(express.json())
 app.use(cors())
+app.use(express.static('uploads'))
 
 db.connect((err)=>{
     if(err) throw err
@@ -22,6 +23,7 @@ let productTableQuery  = `CREATE TABLE if not exists product (
     productPrice VARCHAR(255) NULL,
     productRating VARCHAR(255) NULL,
     productType VARCHAR(255) NULL,
+    image VARCHAR(255) NULL,
     PRIMARY KEY (id));`
 
     db.query(productTableQuery, (err, result)=>{
@@ -37,6 +39,7 @@ let cartTableQuery  = `CREATE TABLE if not exists cart (
     productPrice VARCHAR(255) NULL,
     productRating VARCHAR(255) NULL,
     productType VARCHAR(255) NULL,
+    image VARCHAR(255) NULL,
     PRIMARY KEY (id));`
 
     db.query(cartTableQuery, (err, result)=>{

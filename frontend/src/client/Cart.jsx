@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { Trash, Heart } from 'lucide-react'
 import axios from 'axios'
 import UserContext from '../context/UserContext'
+import { Link } from 'react-router-dom'
 
 
 
@@ -79,12 +80,13 @@ async function deleteCart(id){
         </p>
       </div>
       <div className="flex justify-end space-x-4">
-        <button
+        <Link
+        to='/'
           type="button"
           className="rounded-md border border-black px-3 py-2 text-sm font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
         >
           Back to shop
-        </button>
+        </Link>
         <button
           type="button"
           className="rounded-md border border-black px-3 py-2 text-sm font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
