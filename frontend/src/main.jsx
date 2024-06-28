@@ -16,18 +16,20 @@ import Cart from './client/Cart.jsx'
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
+    {/* client home card */}
     <Route path='/' element={<ClientApp/>}>
     <Route path='' element={<Home/>} />
     <Route path='/cart' element={<Cart/>} />
 
     </Route>
-
+{/* navbarAdminPannel */}
     <Route path='/admin' element={<App/>}>
     <Route path='' element={
       <Protected>
         <AdminPannel/>
       </Protected>
     }/>
+
     <Route path='/admin/addProduct' element={
       <Protected>
         <AddProduct/>
