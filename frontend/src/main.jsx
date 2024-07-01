@@ -12,6 +12,8 @@ import Home from './client/Home.jsx'
 import AdminLogin from './components/AdminLogin.jsx'
 import Protected from './components/Protected.jsx'
 import Cart from './client/Cart.jsx'
+import ClientLogin from './client/ClientLogin.jsx'
+import ClientRegister from './client/ClientRegister.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -20,6 +22,8 @@ const router = createBrowserRouter(
     <Route path='/' element={<ClientApp/>}>
     <Route path='' element={<Home/>} />
     <Route path='/cart' element={<Cart/>} />
+    <Route path='/clientLogin' element={<ClientLogin/>} />
+    <Route path='/clientSignup' element={<ClientRegister/>} />
 
     </Route>
 {/* navbarAdminPannel */}
