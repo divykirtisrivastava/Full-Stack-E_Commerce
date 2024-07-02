@@ -1,75 +1,110 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { ArrowRight } from 'lucide-react'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 export default function ClientRegister() {
+    let navigation = useNavigate()
+    let [username, setUsername] = useState('')
+    let [email, setEmail] = useState('')
+    let [password, setPassword] = useState('')
+    let [image, setImage] = useState(null)
+
+    async function handleSubmit(e){
+        e.preventDefault()
+        let data = new FormData()
+        data.append('username', username)
+        data.append('email', email)
+        data.append('password', password)
+        data.append('image', image)
+
+        await axios.post('http://localhost:3000/api/clientSave', data, {
+          headers:{
+            'Content-Type' : 'multiPart/Form-Data'
+          }
+        })
+        navigation('/clientLogin')
+    }
+
   return (
     <section>
       <div className="grid grid-cols-1 lg:grid-cols-2">
         <div className="flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
           <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md">
-            <h2 className="text-3xl font-bold leading-tight text-black sm:text-4xl">Client SignUp</h2>
-            <p className="mt-2 text-base text-gray-600">
-              Already have an account?{' '}
-              <a
-                href="#"
-                title=""
-                className="font-medium text-black transition-all duration-200 hover:underline"
-              >
-                Sign In
-              </a>
-            </p>
-            <form action="#" method="POST" className="mt-8">
+            <h2 className="text-3xl font-bold leading-tight text-black sm:text-4xl">Client Sign Up</h2>
+            
+            <form action="#" method="POST" className="mt-8" onSubmit={handleSubmit}>
               <div className="space-y-5">
                 <div>
                   <label htmlFor="name" className="text-base font-medium text-gray-900">
                     {' '}
-                    Full Name{' '}
+                    Username{' '}
                   </label>
                   <div className="mt-2">
                     <input
                       className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                       type="text"
-                      placeholder="Full Name"
+                      placeholder="Username"
                       id="name"
+                      onChange={(e)=>setUsername(e.target.value)}
                     ></input>
                   </div>
                 </div>
                 <div>
-                  <label htmlFor="email" className="text-base font-medium text-gray-900">
+                  <label htmlFor="name" className="text-base font-medium text-gray-900">
                     {' '}
-                    Email address{' '}
+                    Email{' '}
                   </label>
                   <div className="mt-2">
                     <input
                       className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                       type="email"
                       placeholder="Email"
-                      id="email"
+                      id="name"
+                      onChange={(e)=>setEmail(e.target.value)}
+
                     ></input>
                   </div>
                 </div>
                 <div>
-                  <div className="flex items-center justify-between">
-                    <label htmlFor="password" className="text-base font-medium text-gray-900">
-                      {' '}
-                      Password{' '}
-                    </label>
-                  </div>
+                  <label htmlFor="name" className="text-base font-medium text-gray-900">
+                    {' '}
+                    Password{' '}
+                  </label>
                   <div className="mt-2">
                     <input
                       className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                       type="password"
                       placeholder="Password"
-                      id="password"
+                      id="name"
+                      onChange={(e)=>setPassword(e.target.value)}
+
                     ></input>
                   </div>
                 </div>
+                
+                <div>
+                  <label htmlFor="name" className="text-base font-medium text-gray-900">
+                    {' '}
+                    Upload Image{' '}
+                  </label>
+                  <div className="mt-2">
+                    <input
+                      className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
+                      type="file"
+                    accept='images/*'
+                      onChange={(e)=>setImage(e.target.files[0])}
+
+                    ></input>
+                  </div>
+                </div>
+                
                 <div>
                   <button
-                    type="button"
+                    type="submit"
                     className="inline-flex w-full items-center justify-center rounded-md bg-black px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-black/80"
                   >
-                    Create Account <ArrowRight className="ml-2" size={16} />
+                  Create Account <ArrowRight className="ml-2" size={16} />
                   </button>
                 </div>
               </div>

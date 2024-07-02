@@ -4,6 +4,7 @@ const db  = require('./databaseConfig.js')
 let productRouter = require('./routes/productRoute.js')
 let adminRouter = require('./routes/adminRoute.js')
 let cartRouter = require('./routes/cartRoute.js')
+let clientRouter = require('./routes/clientRoute.js')
 
 let app = express()
 app.use(express.json())
@@ -49,11 +50,28 @@ let cartTableQuery  = `CREATE TABLE if not exists cart (
         }
     })
   
+let clientDetailTableQuery  = `CREATE TABLE if not exists clientDetail (
+    id INT NOT NULL AUTO_INCREMENT,
+    username VARCHAR(255) NULL,
+    email VARCHAR(255) NULL,
+    password VARCHAR(255) NULL,
+    image VARCHAR(255) NULL,
+    PRIMARY KEY (id));`
+
+    db.query(clientDetailTableQuery, (err, result)=>{
+        if(err) throw err
+        else{
+            console.log("clientDetail Table created")
+        }
+    })
+  
 app.use('/api', productRouter)
 
 app.use('/api', adminRouter)
 
 app.use('/api', cartRouter)
+
+app.use('/api', clientRouter)
 
 
 app.listen(3000, ()=>{
