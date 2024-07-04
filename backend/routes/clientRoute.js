@@ -7,6 +7,8 @@ router.post('/clientSave',uploads.single('image'), clientController.clientSave)
 
 router.post('/clientLogin', clientController.clientLogin)
 
+router.post('/createClient/:unique', clientController.createClient)
+
 
 
 

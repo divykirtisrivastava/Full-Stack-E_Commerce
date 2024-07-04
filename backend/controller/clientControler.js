@@ -31,3 +31,24 @@ exports.clientLogin = (req, res)=>{
     })
 
 }
+
+
+exports.createClient = (req, res)=>{
+    let unique = req.params.unique
+      
+let clientTableQuery  = `CREATE TABLE if not exists ${unique} (
+    id INT NOT NULL AUTO_INCREMENT,
+    productBrand VARCHAR(255) NULL,
+    productPrice VARCHAR(255) NULL,
+    productRating VARCHAR(255) NULL,
+    productType VARCHAR(255) NULL,
+    image VARCHAR(255) NULL,
+    PRIMARY KEY (id));`
+
+    db.query(clientTableQuery, (err, result)=>{
+        if(err) throw err
+        else{
+            console.log("client Table created")
+        }
+    })
+}
