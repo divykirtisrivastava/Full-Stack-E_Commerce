@@ -9,6 +9,7 @@ export default function Home() {
   let [inp, setInp] = useState('')
   let navigation = useNavigate()
   let [data, setData] = useState([])
+  let {login} = useContext(UserContext)
 
   useEffect(() => {
     fetchProductData()
@@ -40,11 +41,10 @@ export default function Home() {
     setData(result.data)
   }
 
-  let { login } = useContext(UserContext)
   async function saveCart(data) {
 
     if (login) {
-      let result = await axios.post('http://localhost:3000/api/cartSave', {
+      let result = await axios.post(`http://localhost:3000/api/cartSave/${login}`, {
         productBrand: data.productBrand,
         productPrice: data.productPrice,
         productType: data.productType,
@@ -70,7 +70,7 @@ export default function Home() {
   }, [])
 
   async function fetchCartData() {
-    let result = await axios.get('http://localhost:3000/api/getCart')
+    let result = await axios.get(`http://localhost:3000/api/getCart/${login}`)
     setCount(result.data.length)
   }
   return (

@@ -9,13 +9,15 @@ import { Link } from 'react-router-dom'
 export default function Cart() {
     let [data, setData] = useState([])
     let {setCount} = useContext(UserContext)
+  let {login} = useContext(UserContext)
+
 
     useEffect(() => {
         fetchCartData()
     }, [])
   
     async function fetchCartData() {
-      let result = await axios.get('http://localhost:3000/api/getCart')
+      let result = await axios.get(`http://localhost:3000/api/getCart/${login}`)
       setData(result.data)
       setCount(result.data.length)
     }
@@ -23,7 +25,7 @@ export default function Cart() {
 async function deleteCart(id){
     let flag  = confirm("Are u sure to delete item")
    if(flag){
-    await axios.delete(`http://localhost:3000/api/deleteCart/${id}`)
+    await axios.delete(`http://localhost:3000/api/deleteCart/${id}/${login}`)
     fetchCartData()
    }
   }

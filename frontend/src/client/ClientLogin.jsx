@@ -25,7 +25,7 @@ export default function ClientLogin() {
     let unique  = data.email.split('@')[0]
     // console.log(unique)
    if(result.data){
-    setLogin(result.data)
+    setLogin(unique)
     navigation('/')
 
     createClientTable(unique)
@@ -34,6 +34,7 @@ export default function ClientLogin() {
     alert("U enter the wrong Details")
    }
   }
+
 
   async function createClientTable(unique){
     await axios.post(`http://localhost:3000/api/createClient/${unique}`)
