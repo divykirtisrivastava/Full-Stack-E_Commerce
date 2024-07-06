@@ -9,6 +9,8 @@ router.post('/clientLogin', clientController.clientLogin)
 
 router.post('/createClient/:unique', clientController.createClient)
 
+router.get('/getClient/:unique', clientController.getClient)
+
 
 
 

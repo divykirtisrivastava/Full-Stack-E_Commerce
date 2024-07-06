@@ -1,9 +1,10 @@
 'use client'
 
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Menu, X } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import UserContext from '../context/UserContext'
+import axios from 'axios'
 
 const menuItems = [
   {
@@ -28,6 +29,18 @@ export default function ClientNavbar() {
 
   }
   let {count} = useContext(UserContext)
+  let {login} = useContext(UserContext)
+
+  useEffect(()=>{
+    getClient()
+  },[login])
+
+  let [data, setData] = useState([])
+
+  async function getClient(){
+    let result = await axios.get(`http://localhost:3000/api/getClient/${login}`)
+    setData(result.data)
+  }
 
   return (
     <div className="fixed z-50 w-full bg-white">
@@ -63,16 +76,33 @@ export default function ClientNavbar() {
             ))}
           </ul>
         </div>
-        <div className="hidden relative lg:block">
+       <div className='flex items-center gap-[20px]'>
+       <div className="hidden relative lg:block">
           <Link
             type="button"
             to="/cart"
             className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
           >
            Cart
-           <span className='absolute w-[20px] h-[30px] bg-red-600 text-center text-xl rounded-[10px] top-[-10px] right-[-10px]'>{count}</span>
+           <span className={`${count ? 'absolute w-[20px] h-[30px] bg-red-600 text-center text-xl rounded-[10px] top-[-10px] right-[-10px]' : 'hidden'}`}>{count}</span>
           </Link>
         </div>
+
+        {/* client image  */}
+
+        {data.map((data)=>(
+          <div className="ml-2 mt-2 hidden lg:block">
+          <span className="relative inline-block">
+            <img
+              className="h-10 w-10 rounded-full"
+              src={`http://localhost:3000/${data.image}`}
+              alt="Dan_Abromov"
+            />
+            <span className="absolute bottom-0 right-0 block h-2.5 w-2.5 rounded-full bg-green-600 ring-2 ring-white"></span>
+          </span>
+        </div>
+        ))}
+       </div>
         <div className="lg:hidden">
           <Menu onClick={toggleMenu} className="h-6 w-6 cursor-pointer" />
         </div>

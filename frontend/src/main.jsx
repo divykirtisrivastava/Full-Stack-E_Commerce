@@ -26,14 +26,13 @@ const router = createBrowserRouter(
     <Route path='/clientSignup' element={<ClientRegister/>} />
 
     </Route>
-{/* navbarAdminPannel */}
+            {/* components */}
     <Route path='/admin' element={<App/>}>
     <Route path='' element={
       <Protected>
         <AdminPannel/>
       </Protected>
     }/>
-
     <Route path='/admin/addProduct' element={
       <Protected>
         <AddProduct/>

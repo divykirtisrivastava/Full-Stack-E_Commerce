@@ -4,8 +4,6 @@ import axios from 'axios'
 import UserContext from '../context/UserContext'
 import { Link } from 'react-router-dom'
 
-
-
 export default function Cart() {
     let [data, setData] = useState([])
     let {setCount} = useContext(UserContext)

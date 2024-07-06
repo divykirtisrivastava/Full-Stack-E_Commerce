@@ -17,7 +17,6 @@ exports.clientSave =  (req, res)=>{
 exports.clientLogin = (req, res)=>{
     let email = req.body.email
     let password = req.body.password
-
     let sql  = "select * from clientdetail where email = ? and password  = ?"
     db.query(sql, [email, password], (err, result)=>{
         if(err)  throw err;
@@ -49,6 +48,19 @@ let clientTableQuery  = `CREATE TABLE if not exists ${unique} (
         if(err) throw err
         else{
             console.log("client Table created")
+        }
+    })
+}
+
+exports.getClient = (req, res)=>{
+    let unique = req.params.unique
+
+    let sql = 'select * from clientdetail where email = ?'
+
+    db.query(sql, [unique + '@gmail.com'], (err, result)=>{
+        if (err) throw err;
+        else{
+            res.json(result)
         }
     })
 }
