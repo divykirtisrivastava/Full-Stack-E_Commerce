@@ -20,15 +20,15 @@ export default function AdminLogin() {
   async function handleLogin(e){
     e.preventDefault()
 
-    let result  = await axios.post('http://localhost:3000/api/adminLogin', data)
-    
-   if(result.data){
-    setPass(result.data)
-    navigation('/admin')
-   }else{
+  let result  = await axios.post('http://localhost:3000/api/adminLogin', data)
+  if(result.data){
+     setPass(result.data)
+     navigation('/admin')
+     }else{
     alert("U enter the wrong Details")
+      }
    }
-  }
+
   return (
     <section>
       <div className="flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">

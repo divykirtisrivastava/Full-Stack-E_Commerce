@@ -1,11 +1,15 @@
 let db = require('../databaseConfig.js')
+let bcrypt  = require('bcryptjs')
 
-exports.clientSave =  (req, res)=>{
+exports.clientSave = async (req, res)=>{
   let username = req.body.username
   let email = req.body.email
   let password = req.body.password
+
+  let hash = await bcrypt.hash(password, 10)
+
   let image = req.file.filename
-    let value = [[username,email,password, image]]
+    let value = [[username,email,hash, image]]
     db.query('insert into clientDetail(username,email,password,image) values ?', [value], (err, result)=>{
         if(err) throw err
         else{
@@ -53,14 +57,18 @@ let clientTableQuery  = `CREATE TABLE if not exists ${unique} (
 }
 
 exports.getClient = (req, res)=>{
-    let unique = req.params.unique
+    let unique =req.params.unique
 
-    let sql = 'select * from clientdetail where email = ?'
+    let sql ='select * from clientdetail where email= ?'
 
-    db.query(sql, [unique + '@gmail.com'], (err, result)=>{
+    db.query(sql, [unique + '@gmail.com'],(err, result)=>{
         if (err) throw err;
         else{
             res.json(result)
         }
     })
 }
+
+
+
+

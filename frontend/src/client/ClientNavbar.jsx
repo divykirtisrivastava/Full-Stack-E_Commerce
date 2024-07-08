@@ -102,6 +102,8 @@ export default function ClientNavbar() {
           </span>
         </div>
         ))}
+
+        
        </div>
         <div className="lg:hidden">
           <Menu onClick={toggleMenu} className="h-6 w-6 cursor-pointer" />
