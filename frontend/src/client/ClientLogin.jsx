@@ -21,10 +21,12 @@ export default function ClientLogin() {
     e.preventDefault()
 
     let result  = await axios.post('http://localhost:3000/api/clientLogin', data)
+    console.log(result.data.token)
+    localStorage.setItem('token', result.data.token)
 
     let unique  = data.email.split('@')[0]
     // console.log(unique)
-   if(result.data){
+   if(result.data.isMatch){
     setLogin(unique)
     navigation('/')
 

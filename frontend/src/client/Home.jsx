@@ -169,7 +169,7 @@ export default function Home() {
               <button
                 type="button"
                 onClick={() => saveCart(data)}
-                className="mt-4 w-full rounded-sm bg-black px-2 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                className="mt-4 w-full rounded-sm bg-blue-400 px-2 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-red-400/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
               >
                 Add To Cart
               </button>

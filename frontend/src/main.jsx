@@ -31,13 +31,11 @@ const router = createBrowserRouter(
     <Route path='' element={
       <Protected>
         <AdminPannel/>
-      </Protected>
-    }/>
+      </Protected>}/>
     <Route path='/admin/addProduct' element={
       <Protected>
         <AddProduct/>
-      </Protected>
-    } />
+      </Protected>} />
     <Route path='/admin/viewData/:id' element={<ViewData/>} />
     <Route path='/admin/updateData/:id' element={<UpdateProduct/>} />
     <Route path='/admin/adminLogin' element={<AdminLogin/>} />

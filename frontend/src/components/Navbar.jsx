@@ -53,7 +53,7 @@ export default function Navbar() {
               <li key={item.name}>
                 <Link
                   to={item.to}
-                  className="text-sm font-semibold text-gray-800 hover:text-gray-900"
+                  className="text-sm font-semibold text-gray-800 hover:text-red-400"
                 >
                   {item.name}
                 </Link>

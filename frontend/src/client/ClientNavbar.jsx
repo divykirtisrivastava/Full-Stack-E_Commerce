@@ -68,7 +68,7 @@ export default function ClientNavbar() {
               <li key={item.name}>
                 <a
                   href={item.href}
-                  className="text-sm font-semibold text-gray-800 hover:text-gray-900"
+                  className="text-sm font-semibold text-gray-800 hover:text-red-400"
                 >
                   {item.name}
                 </a>
