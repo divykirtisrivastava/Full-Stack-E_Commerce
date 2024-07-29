@@ -1,5 +1,6 @@
 let db = require('../databaseConfig.js')
 
+
 exports.adminLogin = (req, res)=>{
     let email = req.body.email
     let password = req.body.password
