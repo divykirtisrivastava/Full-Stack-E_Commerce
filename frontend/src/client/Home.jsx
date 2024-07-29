@@ -73,6 +73,9 @@ export default function Home() {
     let result = await axios.get(`http://localhost:3000/api/getCart/${login}`)
     setCount(result.data.length)
   }
+
+  // let str = "dsgadfg"
+  // console.log(!!str)
   return (
     <>
       <aside className="fixed flex h-screen w-64 flex-col overflow-y-auto border-r bg-black px-5 py-8">

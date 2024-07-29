@@ -1,5 +1,9 @@
 const express = require('express')
 const cors = require('cors')
+const dotenv = require('dotenv')
+dotenv.config({
+    path: './.env'
+})
 const db  = require('./databaseConfig.js')
 let productRouter = require('./routes/productRoute.js')
 let adminRouter = require('./routes/adminRoute.js')
@@ -74,6 +78,6 @@ app.use('/api', cartRouter)
 app.use('/api', clientRouter)
 
 
-app.listen(3000, ()=>{
+app.listen(process.env.PORT, ()=>{
     console.log("server is running at 3000")
 })

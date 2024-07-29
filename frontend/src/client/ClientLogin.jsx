@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom'
 
 export default function ClientLogin() {
   let {setLogin} = useContext(UserContext)
+  let {userLogin} = useContext(UserContext)
   let navigation = useNavigate()
   let [data, setData] = useState({
     email: "",
@@ -20,27 +21,20 @@ export default function ClientLogin() {
   async function handleLogin(e){
     e.preventDefault()
 
-    let result  = await axios.post('http://localhost:3000/api/clientLogin', data)
-    console.log(result.data.token)
-    localStorage.setItem('token', result.data.token)
-
+  let flag=  await userLogin(data)
+    
+   if(flag){
     let unique  = data.email.split('@')[0]
-    // console.log(unique)
-   if(result.data.isMatch){
+
     setLogin(unique)
     navigation('/')
 
-    createClientTable(unique)
 
    }else{
     alert("U enter the wrong Details")
    }
   }
 
-
-  async function createClientTable(unique){
-    await axios.post(`http://localhost:3000/api/createClient/${unique}`)
-  }
   return (
     <section>
       <div className="flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">

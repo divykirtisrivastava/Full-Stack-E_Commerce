@@ -11,6 +11,8 @@ router.post('/createClient/:unique', clientController.createClient)
 
 router.get('/getClient/:unique', clientController.getClient)
 
+router.get('/verify', clientController.verify)
+
 
 
 
