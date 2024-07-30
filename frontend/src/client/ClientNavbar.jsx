@@ -29,17 +29,19 @@ export default function ClientNavbar() {
 
   }
   let {count} = useContext(UserContext)
-  let {login} = useContext(UserContext)
+  let {auth} = useContext(UserContext)
 
   useEffect(()=>{
     getClient()
-  },[login])
+  },[auth])
 
   let [data, setData] = useState([])
 
   async function getClient(){
-    let result = await axios.get(`http://localhost:3000/api/getClient/${login}`)
+   if(auth.userId){
+    let result = await axios.get(`http://localhost:3000/api/getClient/${auth.userId}`)
     setData(result.data)
+   }
   }
 
   return (
@@ -91,7 +93,7 @@ export default function ClientNavbar() {
         {/* client image  */}
 
         {data.map((data)=>(
-          <div className="ml-2 mt-2 hidden lg:block">
+          <div className="ml-2 mt-2 hidden lg:block" key={data.id}>
           <span className="relative inline-block">
             <img
               className="h-10 w-10 rounded-full"

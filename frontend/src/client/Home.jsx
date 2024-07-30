@@ -9,7 +9,7 @@ export default function Home() {
   let [inp, setInp] = useState('')
   let navigation = useNavigate()
   let [data, setData] = useState([])
-  let {login} = useContext(UserContext)
+  let {auth} = useContext(UserContext)
 
   useEffect(() => {
     fetchProductData()
@@ -43,8 +43,8 @@ export default function Home() {
 
   async function saveCart(data) {
 
-    if (login) {
-      let result = await axios.post(`http://localhost:3000/api/cartSave/${login}`, {
+    if (auth.userId) {
+      let result = await axios.post(`http://localhost:3000/api/cartSave/${auth.userId}`, {
         productBrand: data.productBrand,
         productPrice: data.productPrice,
         productType: data.productType,
@@ -67,11 +67,13 @@ export default function Home() {
 
   useEffect(() => {
     fetchCartData()
-  }, [])
+  }, [auth])
 
   async function fetchCartData() {
-    let result = await axios.get(`http://localhost:3000/api/getCart/${login}`)
+    if(auth.userId){
+      let result = await axios.get(`http://localhost:3000/api/getCart/${auth.userId}`)
     setCount(result.data.length)
+    }
   }
 
   // let str = "dsgadfg"
@@ -85,15 +87,15 @@ export default function Home() {
             <div className="space-y-3 ">
               <label className="px-3 text-xs font-semibold uppercase text-white">Search</label>
 
-              <form class="max-w-md mx-auto">
-                <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
-                <div class="relative">
-                  <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+              <form className="max-w-md mx-auto">
+                <label htmlFor="default-search" className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                    <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                      <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                     </svg>
                   </div>
-                  <input type="search" id="default-search" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Product By Type..." required
+                  <input type="search" id="default-search" className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Product By Type..." required
                     onChange={(e) => setInp(e.target.value)} />
 
                 </div>
@@ -158,7 +160,7 @@ export default function Home() {
       {/* card section strat here */}
       <div className='relative  left-[300px] top-[70px] flex justify-evenly w-[1000px] flex-wrap'>
         {data.map((data) => (
-          <div className="w-[300px] rounded-md border">
+          <div className="w-[300px] rounded-md border" key={data.id}>
             <img
               src={`http://localhost:3000/${data.image}`}
               className="h-[200px] w-full rounded-t-md object-cover"

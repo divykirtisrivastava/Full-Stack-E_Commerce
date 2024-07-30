@@ -5,22 +5,21 @@ import axios from 'axios'
 export default function UserContextProvider({children}) {
     let [count, setCount] = useState(false)
     
-    let [login, setLogin] = useState('')
-
     let [ auth , setAuth] = useState({
-      token: !!localStorage.getItem('token'),
-      isAuthenticated: false,
-      userId: null
+      token: localStorage.getItem('token') || null,
+      isAuthenticated: !!localStorage.getItem('token'),
+      userId: ''
     })
 
     let userLogin  = async (data)=>{
       let result  = await axios.post('http://localhost:3000/api/clientLogin', data)
-// console.log(result)
+
       if(result.data.isMatch){
-        localStorage.setItem('token', result.data.token)
+        let token = result.data.token
+        localStorage.setItem('token', token)
         let unique  = data.email.split('@')[0]
         createClientTable(unique)
-        
+        setAuth({token, isAuthenticated: true, userId: unique})
         return true
       }
     }
@@ -37,7 +36,7 @@ let profile = async ()=>{
       let token = localStorage.getItem('token')
       if(token){
         let result  = await axios.get('http://localhost:3000/api/verify')
-        console.log(result)
+        setAuth(preAuth => ({...preAuth,userId: result.data.email.split("@")[0]} ))
       }
 }
 
@@ -49,7 +48,7 @@ axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
   profile()
 }, [])
   return (
-    <UserContext.Provider value={{count, setCount, login, setLogin, userLogin}}>
+    <UserContext.Provider value={{count, setCount, auth, userLogin}}>
         {children}
     </UserContext.Provider>
   )
