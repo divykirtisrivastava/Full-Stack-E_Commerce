@@ -29,7 +29,7 @@ export default function ClientNavbar() {
 
   }
   let {count} = useContext(UserContext)
-  let {auth} = useContext(UserContext)
+  let {auth, userLogout} = useContext(UserContext)
 
   useEffect(()=>{
     getClient()
@@ -44,6 +44,10 @@ export default function ClientNavbar() {
    }
   }
 
+  function logout(){
+    userLogout()
+    window.location.reload()
+  }
   return (
     <div className="fixed z-50 w-full bg-white">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 sm:px-6 lg:px-8">
@@ -79,6 +83,9 @@ export default function ClientNavbar() {
           </ul>
         </div>
        <div className='flex items-center gap-[20px]'>
+      {auth.userId &&   <button className='p-2 rounded bg-black text-white' 
+        onClick={logout}
+        >Logout</button>}
        <div className="hidden relative lg:block">
           <Link
             type="button"

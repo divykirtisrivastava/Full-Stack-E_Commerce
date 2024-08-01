@@ -5,7 +5,6 @@ import UserContext from '../context/UserContext'
 import { Link, useNavigate } from 'react-router-dom'
 
 export default function ClientLogin() {
-  let {setLogin} = useContext(UserContext)
   let {userLogin} = useContext(UserContext)
   let navigation = useNavigate()
   let [data, setData] = useState({
@@ -24,9 +23,7 @@ export default function ClientLogin() {
   let flag=  await userLogin(data)
     
    if(flag){
-    let unique  = data.email.split('@')[0]
 
-    setLogin(unique)
     navigation('/')
 
 

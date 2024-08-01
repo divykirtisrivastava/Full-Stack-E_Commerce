@@ -3,7 +3,7 @@ let bcrypt  = require('bcryptjs')
 let jwt  = require('jsonwebtoken')
 
 
- function generateToken(user){
+function generateToken(user){
      return   jwt.sign({id : user.id},process.env.JWT_SECRET, {expiresIn: '1h'})
 }
 
